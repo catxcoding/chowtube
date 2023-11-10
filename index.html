@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chowtube</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Chowtube!</h1>
+        <h2>tagline</h2>
+    </header>
+
+        <!-- Spoonacular API for recipe form and results -->
+    <main>
+        <aside class="recipe-form recipe-style">
+            <form>
+                <div class="form-field">
+                    <label for="ingredient">Ingredient</label>
+                    <input type="text" id="ingredient" name="ingredient">
+                </div>
+                <div class="form-field">
+                    <label for="calories">Calories</label>
+                    <input type="number" id="calories" name="calories">
+                </div>
+                <div class="form-field">
+                    <label for="protein">Protein</label>
+                    <input type="number" id="protein" name="protein">
+                </div>
+                <div class="form-field">
+                    <label for="fat">Fat</label>
+                    <input type="number" id="fat" name="fat">
+                </div>
+                <div class="form-field">
+                    <label for="carbs">Carbs</label>
+                    <input type="number" id="carbs" name="carbs">
+                </div>
+                <div class="form-field">
+                    <label for="diet">Diet</label>
+                    <select id="diet" name="diet">
+                        <option value="none">Select Diet</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="pescetarian">Pescetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="gluten-free">Gluten Free</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="cuisine">Cuisine</label>
+                    <select id="cuisine" name="cuisine">
+                        <option value="none">Select Cuisine</option>
+                        <option value="american">American</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="asian">Asian</option>
+                        <option value="french">French</option>
+                        <option value="italian">Italian</option>
+                        <option value="indian">Indian</option>
+                        <option value="vietnamese">Vietnamese</option>
+                    </select>
+                </div>
+                <!-- confirm input id of ingredient since were excluding -->
+                <div class="form-field">
+                    <label for="exclude-ingredient">Exclude Ingredient</label>
+                    <input type="text" id="ingredient" name="ingredient">
+                </div>
+            </form>
+        </aside>
+    </main>
+
+    <!-- confirm class or id for styling! -->
+    <section class="recipe-results recipe-style">
+        <h3 id="recipe-results">Your Meal</h3>
+    </section>
+
+    <!-- Youtube API -->
+    <figure class="youtube-video">
+        <h3>Ready to cook?</h3>
+        <!-- div for iFrame of youtube embed -->
+        <div id="video-player"></div>
+        <!-- add similar recipe button -->
+    </figure>
+
+    <footer>
+        <!-- similar recipe -->
+        <!-- random recipe (?) -->
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
