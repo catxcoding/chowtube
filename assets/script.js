@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('form');
     var resultsSection = document.getElementById('recipe-results');
 
-    displayRecentlyViewedRecipes();
+    // Load and display recently viewed recipes
+    displayRecentlyViewedRecipes(); // New code starts here
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var cuisine = document.getElementById('cuisine').value;
 
         // Start building the query URL
-        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2'; // Limit results to 2
+        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2';
         var queryParams = [];
 
         // Add parameters only if fields are filled
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Display up to three recipes
-                data.results.slice(0, 2).forEach(function (recipe) { // Process only the first 3 recipes
+                data.results.slice(0, 2).forEach(function (recipe) {
                     var recipeElement = document.createElement('div');
                     recipeElement.className = 'recipe';
 
@@ -68,12 +69,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         recipeElement.appendChild(image);
                     }
 
-                    // Create a link to the recipe's original webpage
                     if (recipe.id) {
                         var link = document.createElement('a');
-                        link.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`; // Spoonacular recipe URL format
+                        link.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`;
                         link.textContent = 'View Recipe';
-                        link.target = '_blank'; // Open in a new tab
+                        link.target = '_blank';
+                        link.onclick = function() {
+                            saveRecipeToRecentlyViewed({ title: recipe.title, url: link.href });
+                        };
                         recipeElement.appendChild(link);
                     }
 
@@ -86,28 +89,28 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
+    // Functions for handling recently viewed recipes
     function saveRecipeToRecentlyViewed(recipe) {
-        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
-        recipes = recipes.filter(r => r.url !== recipe.url);
-        recipes.unshift(recipe);
-        recipes = recipes.slice(0, 3);
-        localStorage.setItem("recentlyViewedRecipes", JSON.stringify(recipes));
+        var recipes = JSON.parse(localStorage.getItem('recentlyViewedRecipes')) || [];
+        recipes = recipes.filter(r => r.url !== recipe.url); // Remove duplicates
+        recipes.unshift(recipe); // Add new recipe to the front
+        recipes = recipes.slice(0, 3); // Keep only the last 5 recipes
+        localStorage.setItem('recentlyViewedRecipes', JSON.stringify(recipes));
         displayRecentlyViewedRecipes();
     }
 
     function displayRecentlyViewedRecipes() {
-        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
-        var list = document.getElementById("recent-recipe-list");
-        list.innerHTML = "";
+        var recipes = JSON.parse(localStorage.getItem('recentlyViewedRecipes')) || [];
+        var list = document.getElementById('recently-viewed-list');
+        list.innerHTML = ''; // Clear current list
         recipes.forEach(function(recipe) {
-            var listItem = document.createElement("li");
-            var link = document.createElement("a");
+            var listItem = document.createElement('li');
+            var link = document.createElement('a');
             link.href = recipe.url;
             link.textContent = recipe.title;
-            link.target = "_blank";
+            link.target = '_blank';
             listItem.appendChild(link);
             list.appendChild(listItem);
         });
     }
-
 });
