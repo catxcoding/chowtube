@@ -1,0 +1,129 @@
+/* General Styles */
+body, h1, h2, h3, form, figure, footer {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header Styles */
+header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px; /* Large text for the main title */
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 5px;
+}
+
+/* Main Section Styles */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/*Containter Styles */
+.container {
+    display: flex;
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 2;
+}
+
+/* Recipe Form Styles */
+.recipe-form {
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+.form-field input,
+.form-field select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 2px solid #000;
+    margin-bottom: 10px;
+}
+
+/* Recipe Results Styles */
+.recipe-results {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.recipe-results h3 {
+    font-size: 24px;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+/* YouTube Video Styles */
+.youtube-video {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 0;
+}
+
+.youtube-video h3 {
+    font-size: 24px;
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+}
+
+#video-player {
+    background-color: #444;
+    height: 360px; /* Placeholder height for the video */
+    width: 100%;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Additional Styles for Typographic Elements */
+h3 {
+    font-size: 24px;
+}
+
+/* Helper Classes */
+.text-center {
+    text-align: center;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
