@@ -1,4 +1,4 @@
-# chowtube
+# CHOWTUBE
 07 Project by Cat Thompson, Alex Sierra and Jared Eichhorst
 
 # Meal Search Website
@@ -19,23 +19,20 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 - **Save Favorite Meals:** Users can mark meals as favorites for easy access.
 
 
-## Technologies Used
-
-- Frontend: HTML, CSS, JavaScript (Framework if applicable)
-- Backend: (Specify backend language or framework)
-- Database: (Database name, if applicable)
+## Technologies and Resources Used
+- Frontend (HTML, CSS, Javascript)
 - YouTube API for video integration
-- Spoonacular API for video intergration
+- Spoonacular API for recipe intergration
+- Chat GBT assisted in README and User Story
+- 
 
 ## Contribution
-
-
+- Cat Thompson (catxcoding)
+- Alex Sierra (asierra619)
+- Jared Eichhorst (jarede712)
 
 ## License
-
-
-
-## Contact
+- MIT 
 
 
 
