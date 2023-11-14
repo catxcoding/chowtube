@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('form');
     var resultsSection = document.getElementById('recipe-results');
 
-    displayRecentRecipes();
+    displayRecentlyViewedRecipes();
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var cuisine = document.getElementById('cuisine').value;
 
         // Start building the query URL
-        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2'; // Limit results to 3
+        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2'; // Limit results to 2
         var queryParams = [];
 
         // Add parameters only if fields are filled
@@ -88,13 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function saveRecipeToRecentlyViewed(recipe) {
         var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
+        recipes = recipes.filter(r => r.url !== recipe.url);
         recipes.unshift(recipe);
         recipes = recipes.slice(0, 3);
         localStorage.setItem("recentlyViewedRecipes", JSON.stringify(recipes));
-        displayRecentRecipes();
+        displayRecentlyViewedRecipes();
     }
 
-    function displayRecentRecipes() {
+    function displayRecentlyViewedRecipes() {
         var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
         var list = document.getElementById("recent-recipe-list");
         list.innerHTML = "";
