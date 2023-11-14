@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('form');
     var resultsSection = document.getElementById('recipe-results');
 
+    displayRecentRecipes();
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -83,4 +85,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 resultsSection.innerHTML = `<p>An error occurred: ${error.message}</p>`;
             });
     });
+
+    function saveRecipeToRecentlyViewed(recipe) {
+        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
+        recipes.unshift(recipe);
+        recipes = recipes.slice(0, 3);
+        localStorage.setItem("recentlyViewedRecipes", JSON.stringify(recipes));
+        displayRecentRecipes();
+    }
+
+    function displayRecentRecipes() {
+        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
+        var list = document.getElementById("recent-recipe-list");
+        list.innerHTML = "";
+        recipes.forEach(function(recipe) {
+            var listItem = document.createElement("li");
+            var link = document.createElement("a");
+            link.href = recipe.url;
+            link.textContent = recipe.title;
+            link.target = "_blank";
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+    }
+
 });
