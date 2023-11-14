@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('form');
     var resultsSection = document.getElementById('recipe-results');
 
+    displayRecentRecipes();
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var cuisine = document.getElementById('cuisine').value;
 
         // Start building the query URL
-        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=3'; // Limit results to 3
+        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2'; // Limit results to 3
         var queryParams = [];
 
         // Add parameters only if fields are filled
@@ -51,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Display up to three recipes
-                data.results.slice(0, 3).forEach(function (recipe) { // Process only the first 3 recipes
+                data.results.slice(0, 2).forEach(function (recipe) { // Process only the first 3 recipes
                     var recipeElement = document.createElement('div');
                     recipeElement.className = 'recipe';
 
@@ -83,4 +85,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 resultsSection.innerHTML = `<p>An error occurred: ${error.message}</p>`;
             });
     });
+
+    function saveRecipeToRecentlyViewed(recipe) {
+        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
+        recipes.unshift(recipe);
+        recipes = recipes.slice(0, 3);
+        localStorage.setItem("recentlyViewedRecipes", JSON.stringify(recipes));
+        displayRecentRecipes();
+    }
+
+    function displayRecentRecipes() {
+        var recipes = JSON.parse(localStorage.getItem("recentlyViewedRecipes")) || [];
+        var list = document.getElementById("recent-recipe-list");
+        list.innerHTML = "";
+        recipes.forEach(function(recipe) {
+            var listItem = document.createElement("li");
+            var link = document.createElement("a");
+            link.href = recipe.url;
+            link.textContent = recipe.title;
+            link.target = "_blank";
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+    }
+
 });
