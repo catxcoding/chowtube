@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var cuisine = document.getElementById('cuisine').value;
 
         // Start building the query URL
-        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722';
+        var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=3'; // Limit results to 3
         var queryParams = [];
 
         // Add parameters only if fields are filled
@@ -50,9 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                // Display the recipes with images and links
-                var recipes = data.results;
-                recipes.forEach(function (recipe) {
+                // Display up to three recipes
+                data.results.slice(0, 3).forEach(function (recipe) { // Process only the first 3 recipes
                     var recipeElement = document.createElement('div');
                     recipeElement.className = 'recipe';
 
@@ -67,24 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         recipeElement.appendChild(image);
                     }
 
-                    // Adding link to the recipe here
+                    // Create a link to the recipe's original webpage
                     if (recipe.id) {
-                        var recipeUrl = `https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=96cb3032d9484e309c1606c98cb9a722`;
-                        // Fetch the detailed recipe information to get the sourceUrl
-                        fetch(recipeUrl)
-                            .then(detailResponse => detailResponse.json())
-                            .then(detailData => {
-                                if (detailData.sourceUrl) {
-                                    var link = document.createElement('a');
-                                    link.href = detailData.sourceUrl;
-                                    link.textContent = 'View Recipe';
-                                    link.target = '_blank'; // to open in a new tab
-                                    recipeElement.appendChild(link);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error fetching recipe details:', error);
-                            });
+                        var link = document.createElement('a');
+                        link.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`; // Spoonacular recipe URL format
+                        link.textContent = 'View Recipe';
+                        link.target = '_blank'; // Open in a new tab
+                        recipeElement.appendChild(link);
                     }
 
                     resultsSection.appendChild(recipeElement);
