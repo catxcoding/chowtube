@@ -68,6 +68,24 @@ main {
     margin-bottom: 10px;
 }
 
+.form-field button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.form-field button:hover {
+    background-color: #45a049;
+}
+
 /* Recipe Results Styles */
 .recipe-results {
     background-color: #000;
@@ -104,6 +122,35 @@ main {
     background-color: #444;
     height: 360px; /* Placeholder height for the video */
     width: 100%;
+}
+
+/* Recently Viewed Recipes Styles */
+
+.recently-viewed-recipes {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.recently-viewed-recipes h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#recently-viewed-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#recently-viewed-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#recently-viewed-list li:last-child {
+    border-bottom: none;
 }
 
 /* Footer Styles */
