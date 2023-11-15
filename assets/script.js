@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('form');
     var resultsSection = document.getElementById('recipe-results');
+    var player; // Global YouTube player variable
 
     // Load and display recently viewed recipes
     displayRecentlyViewedRecipes();
@@ -66,11 +67,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (recipe.id) {
                         var link = document.createElement('a');
-                        link.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`;
-                        link.textContent = 'View Recipe';
-                        link.target = '_blank';
+                        link.href = '#';
+                        link.textContent = recipe.title;
                         link.onclick = function() {
                             saveRecipeToRecentlyViewed({ title: recipe.title, url: link.href });
+                            searchAndLoadVideo(recipe.title); // Use the recipe title for searching
+                            return false; // Prevent default link behavior
                         };
                         recipeElement.appendChild(link);
                     }
@@ -108,13 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // YouTube Iframe API integration
+    // YouTube Iframe API setup
     window.onYouTubeIframeAPIReady = function() {
-        var initialVideoId = 'M7lc1UVf-VE'; // Replace with default or dynamic video ID
-        var player = new YT.Player('video-player', {
+        player = new YT.Player('video-player', {
             height: '360',
             width: '640',
-            videoId: initialVideoId,
+            videoId: 'M7lc1UVf-VE', // Default video or placeholder
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -130,28 +131,30 @@ document.addEventListener('DOMContentLoaded', function () {
         // Handle player state changes
     }
 
+    // Function to search and load video based on recipe
     function searchAndLoadVideo(recipeTitle) {
-            var searchQuery = recipeTitle + ' recipe';
-            var apiKey = 'AIzaSyBcbRLEkWwZsAN8iaZReHMuQTsRktIpSgA';
-            var apiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=1&key=${apiKey}';
+        var searchQuery = recipeTitle + " recipe"; // Customize this query
+        var apiKey = 'AIzaSyDf6h2cBz3Y9u-k5tUOxQUlbILR-D7jGYw'; 
+        var apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=1&key=${apiKey}`;
 
-            fetch(apiUrl)
+        fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.items.length > 0) {
+                if (data.items && data.items.length > 0) {
                     var videoId = data.items[0].id.videoId;
                     loadVideoById(videoId);
                 } else {
-                    console.log('No videos found for: ', searchQuery);
+                    console.log('No videos found for:', searchQuery);
                 }
             })
-            .catch(error => console.error('error fetching video: ', error));
-        }
-        function loadVideoById(videoId) {
-            if (player && player.loadVideoById) {
-                player.loadVideoById(videoId);
+            .catch(error => console.error('Error fetching video:', error));
+    }
+
+    function loadVideoById(videoId) {
+        if (player && player.loadVideoById) {
+            player.loadVideoById(videoId);
         } else {
-            console.error('YouTube player not initialized.')
+            console.error('YouTube player not initialized');
         }
     }
 });
