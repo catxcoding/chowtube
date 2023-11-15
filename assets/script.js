@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var resultsSection = document.getElementById('recipe-results');
 
     // Load and display recently viewed recipes
-    displayRecentlyViewedRecipes(); // New code starts here
+    displayRecentlyViewedRecipes();
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Get the user input from the form fields
+        // Get user input from form fields
         var ingredient = document.getElementById('ingredient').value;
         var excludeIngredient = document.getElementById('exclude-ingredient').value;
         var calories = document.getElementById('calories').value;
@@ -18,11 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var diet = document.getElementById('diet').value;
         var cuisine = document.getElementById('cuisine').value;
 
-        // Start building the query URL
+        // Build the query URL
         var baseUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=96cb3032d9484e309c1606c98cb9a722&number=2';
         var queryParams = [];
 
-        // Add parameters only if fields are filled
         if (ingredient) queryParams.push('includeIngredients=' + encodeURIComponent(ingredient));
         if (excludeIngredient) queryParams.push('excludeIngredients=' + encodeURIComponent(excludeIngredient));
         if (calories) queryParams.push('maxCalories=' + encodeURIComponent(calories));
@@ -32,10 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (diet && diet !== 'none') queryParams.push('diet=' + encodeURIComponent(diet));
         if (cuisine && cuisine !== 'none') queryParams.push('cuisine=' + encodeURIComponent(cuisine));
 
-        // Combine the base URL with the query parameters
         var queryUrl = baseUrl + (queryParams.length ? '&' + queryParams.join('&') : '');
 
-        // Make the API request
+        // API request
         fetch(queryUrl)
             .then(response => {
                 if (!response.ok) {
@@ -44,16 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                // Clear previous results
                 resultsSection.innerHTML = '';
 
-                // Handle no results found
                 if (!data.results || data.results.length === 0) {
                     resultsSection.innerHTML = '<p>No recipes found. Please try different search criteria.</p>';
                     return;
                 }
 
-                // Display up to three recipes
                 data.results.slice(0, 2).forEach(function (recipe) {
                     var recipeElement = document.createElement('div');
                     recipeElement.className = 'recipe';
@@ -84,17 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             })
             .catch(error => {
-                // Handle errors
                 resultsSection.innerHTML = `<p>An error occurred: ${error.message}</p>`;
             });
     });
 
-    // Functions for handling recently viewed recipes
+    // Recently viewed recipes functions
     function saveRecipeToRecentlyViewed(recipe) {
         var recipes = JSON.parse(localStorage.getItem('recentlyViewedRecipes')) || [];
-        recipes = recipes.filter(r => r.url !== recipe.url); // Remove duplicates
-        recipes.unshift(recipe); // Add new recipe to the front
-        recipes = recipes.slice(0, 3); // Keep only the last 5 recipes
+        recipes = recipes.filter(r => r.url !== recipe.url);
+        recipes.unshift(recipe);
+        recipes = recipes.slice(0, 3);
         localStorage.setItem('recentlyViewedRecipes', JSON.stringify(recipes));
         displayRecentlyViewedRecipes();
     }
@@ -102,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayRecentlyViewedRecipes() {
         var recipes = JSON.parse(localStorage.getItem('recentlyViewedRecipes')) || [];
         var list = document.getElementById('recently-viewed-list');
-        list.innerHTML = ''; // Clear current list
+        list.innerHTML = '';
         recipes.forEach(function(recipe) {
             var listItem = document.createElement('li');
             var link = document.createElement('a');
@@ -112,5 +106,27 @@ document.addEventListener('DOMContentLoaded', function () {
             listItem.appendChild(link);
             list.appendChild(listItem);
         });
+    }
+
+    // YouTube Iframe API integration
+    window.onYouTubeIframeAPIReady = function() {
+        var initialVideoId = 'M7lc1UVf-VE'; // Replace with default or dynamic video ID
+        var player = new YT.Player('video-player', {
+            height: '360',
+            width: '640',
+            videoId: initialVideoId,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    };
+
+    function onPlayerReady(event) {
+        // Player is ready
+    }
+
+    function onPlayerStateChange(event) {
+        // Handle player state changes
     }
 });
