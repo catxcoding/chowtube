@@ -129,4 +129,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function onPlayerStateChange(event) {
         // Handle player state changes
     }
+
+    function searchAndLoadVideo(recipeTitle) {
+            var searchQuery = recipeTitle + ' recipe';
+            var apiKey = 'AIzaSyBcbRLEkWwZsAN8iaZReHMuQTsRktIpSgA';
+            var apiUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&type=video&maxResults=1&key=${apiKey}';
+
+            fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.items.length > 0) {
+                    var videoId = data.items[0].id.videoId;
+                    loadVideoById(videoId);
+                } else {
+                    console.log('No videos found for: ', searchQuery);
+                }
+            })
+            .catch(error => console.error('error fetching video: ', error));
+        }
+        function loadVideoById(videoId) {
+            if (player && player.loadVideoById) {
+                player.loadVideoById(videoId);
+        } else {
+            console.error('YouTube player not initialized.')
+        }
+    }
 });
