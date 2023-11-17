@@ -23,8 +23,8 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 - Frontend (HTML, CSS, Javascript)
 - YouTube API for video integration
 - Spoonacular API for recipe intergration
-- Chat GBT assisted in README and User Story
-- 
+- Chat GPT assisted in README and User Story
+
 
 ## Contribution
 - Cat Thompson (catxcoding)
