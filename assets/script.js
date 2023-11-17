@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                data.results.slice(0, 2).forEach(function (recipe) {
+                data.results.forEach(function (recipe) {
                     var recipeElement = document.createElement('div');
                     recipeElement.className = 'recipe';
 
@@ -61,20 +61,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (recipe.image) {
                         var image = document.createElement('img');
                         image.src = recipe.image;
-                        image.alt = recipe.title + ' image';
+                        image.alt = recipe.title;
                         recipeElement.appendChild(image);
                     }
 
+                    var viewRecipeButton = document.createElement('button');
+                    viewRecipeButton.textContent = 'Play Video';
+                    viewRecipeButton.onclick = function() {
+                        searchAndLoadVideo(recipe.title); // Use the recipe title for searching
+                    };
+                    recipeElement.appendChild(viewRecipeButton);
+
+                    // Add a link to Spoonacular page for more details
                     if (recipe.id) {
-                        var link = document.createElement('a');
-                        link.href = '#';
-                        link.textContent = recipe.title;
-                        link.onclick = function() {
-                            saveRecipeToRecentlyViewed({ title: recipe.title, url: link.href });
-                            searchAndLoadVideo(recipe.title); // Use the recipe title for searching
-                            return false; // Prevent default link behavior
-                        };
-                        recipeElement.appendChild(link);
+                        var spoonacularLink = document.createElement('a');
+                        spoonacularLink.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`;
+                        spoonacularLink.textContent = 'More Details';
+                        spoonacularLink.target = '_blank';
+                        recipeElement.appendChild(spoonacularLink);
                     }
 
                     resultsSection.appendChild(recipeElement);
