@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         player = new YT.Player('video-player', {
             height: '360',
             width: '640',
-            videoId: 'M7lc1UVf-VE', // Default video or placeholder
+            videoId: '', // Default video or placeholder
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
