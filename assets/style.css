@@ -132,8 +132,23 @@ main {
 }
 
 .recipe-results .recipe {
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.recipe-results .description {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.recipe-results .recipe img {
+    max-width: 200px; 
+    max-height: 200px; 
+    object-fit: cover;
+}
+
 /* YouTube Video Styles */
 .youtube-video {
     margin: 30px auto;
