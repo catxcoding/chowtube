@@ -78,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         spoonacularLink.href = `https://spoonacular.com/recipes/${recipe.title}-${recipe.id}`;
                         spoonacularLink.textContent = 'More Details';
                         spoonacularLink.target = '_blank';
+
+                        // Add click event to save to recently viewed
+                        spoonacularLink.onclick = function() {
+                            saveRecipeToRecentlyViewed({ title: recipe.title, url: spoonacularLink.href });
+                        };
+
                         recipeElement.appendChild(spoonacularLink);
                     }
 
