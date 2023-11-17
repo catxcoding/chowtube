@@ -14,11 +14,13 @@ body, h1, h2, h3, form, figure, footer {
 a {
     color: var(--misc-color);
     text-decoration: none;
+    font-size: 20px;
 }
 
 a:hover {
     color: var(--third-color);
 }
+
 /* The navigation bar */
 .navbar {
     overflow: hidden;
@@ -54,6 +56,13 @@ h3 {
     margin-top: 5px;
     font-weight: 400;
 }
+
+h4 {
+        font-size: 28px;
+        margin-top: 5px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
 
 /* Main Section Styles */
 main {
@@ -138,7 +147,8 @@ main {
     justify-content: center;
 }
 
-.recipe-results .description {
+
+.recipe-results .recipe title {
     margin-top: 10px;
     text-align: center;
 }
@@ -149,6 +159,23 @@ main {
     object-fit: cover;
 }
 
+.recipe-results .recipe button {
+    background-color: var(--misc-color);
+    border: none;
+    color: var(--third-color);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.recipe-results .recipe button:hover {
+    background-color: var(--third-color); 
+    color: var(--misc-color); 
+    cursor: pointer;
+}
 /* YouTube Video Styles */
 .youtube-video {
     margin: 30px auto;
@@ -219,47 +246,112 @@ h3 {
 
 
 /* Media Queries */
-
-/* For tablets and larger smartphones (landscape) */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) { 
     .container {
         flex-direction: column;
     }
 
     .left, .right {
         width: 100%;
-        padding: 0 15px; 
     }
+}
 
-    .recipe-form, .recipe-results {
+@media screen and (max-width: 768px) { 
+    .form-field input, .form-field select {
         width: 100%;
-        max-width: none; 
+        padding: 5px;
+        box-sizing: border-box; 
     }
 }
 
-/* For smartphones (portrait) */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 36px; 
+@media screen and (max-width: 768px) { 
+    .form-field button {
+        width: 100%;
+        padding: 10px;
     }
+}
 
-    header h2, .recipe-results h3, .recently-viewed-recipes h3, .youtube-video h3 {
-        font-size: 20px; 
+/* Large Desktop Screens */
+
+@media screen and (min-width: 1200px) {
+    /* Styles for screens wider than 1200px */
+    h1 {
+        font-size: 56px;
     }
-
-    .form-field label {
-        font-size: 14px; 
+    h2 {
+        font-size: 30px;
     }
+}
 
-    .form-field input, .form-field select, .form-field button {
-        font-size: 14px; 
+/* Medium Screens - Small Desktops/Large Tablets */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    /* Styles for screens between 992px and 1199px */
+
+    h1 {
+        font-size: 48px;
     }
+    h2 {
+        font-size: 28px;
+    }
+    .main {
+        flex-direction: row; 
+    }
+    .left, .right {
+        width: 50%; 
+    }
+}
 
+/* Small Screens - Tablets/Big Phones */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    /* Styles for screens between 768px and 991px */
+    h1 {
+        font-size: 40px; 
+    }
+    main {
+        flex-direction: column; 
+    }
+    .left, .right {
+        width: 100%; 
+    }
     .youtube-video {
-        margin: 20px 0; 
+        max-width: 100%; 
     }
-
-    footer {
-        padding: 10px 0; 
 }
+
+/* Extra Small Screens - Small Tablets/Phones */
+@media screen and (max-width: 767px) {
+    /* Styles for screens smaller than 768px */
+    h1 {
+        font-size: 32px; 
+    }
+    .navbar, header, .recipe-form, .recipe-results, .youtube-video, footer {
+        padding: 10px; 
+    }
+    main {
+        flex-direction: column; 
+    }
+    .left, .right {
+        width: 100%; 
+    }
+    .form-field input, .form-field select, .form-field button {
+        width: 100%; 
+    }
+    .youtube-video {
+        max-width: 100%; 
+    }
+    .recipe-results .recipe img {
+        max-width: 100px; 
+        max-height: 100px;
+    }
+}
+
+/* Very Small Screens - Small Phones */
+@media screen and (max-width: 480px) {
+    /* Styles for screens smaller than 480px */
+    h1 {
+        font-size: 28px;
+    }
+    .form-field label, .form-field input, .form-field select {
+        font-size: 14px; 
+    }
 }
