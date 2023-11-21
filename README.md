@@ -16,14 +16,26 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 - **Search and Recommendations:** After inputting data, the system provides a meal recommendations meeting the criteria.
 - **Meal Details:** Detailed information about each meal, including nutritional content and ingredients
 - **YouTube Video Integration:** Users can watch a YouTube video tutorial or recipe demonstration for the meal.
-- **Save Favorite Meals:** Users can mark meals as favorites for easy access.
+- **View Recent Recipes:** Users can see meals they have watched/searched.
+
+## Completed Taks
+
+- Uses CSS Framework
+- Deployed to Git Hub
+- Interactive User Input
+- Uses Two Server-Side APIs: Spoonaculat and Youtube
+- Uses Client Side Storage (Recently Viewed Recipes)
+- Responsive to differnt size screens and devices
+- Clean Repository
+- 
 
 
 ## Technologies and Resources Used
 - Frontend (HTML, CSS, Javascript)
 - YouTube API for video integration
 - Spoonacular API for recipe intergration
-- Chat GPT assisted in README and User Story
+- Chat GBT assisted in README and User Story
+- W3Schools + MDN
 
 
 ## Contribution
@@ -34,8 +46,15 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 ## License
 - MIT 
 
+## Links and Photos
+
+[Deployed Website](https://catxcoding.github.io/chowtube/)---
+[Repository](https://github.com/catxcoding/chowtube)---
+
+![ScreenShot1](assets/images/screenshot1.png)
+![ScreenShot](assets/images/screenshot2.png)
+![MobileGIF](assets/images/mobile.GIF)
 
 
----
 
 
