@@ -27,7 +27,6 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 - Uses Client Side Storage (Recently Viewed Recipes)
 - Responsive to differnt size screens and devices
 - Clean Repository
-- 
 
 
 ## Technologies and Resources Used
@@ -36,6 +35,7 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 - Spoonacular API for recipe intergration
 - Chat GBT assisted in README and User Story
 - W3Schools + MDN
+- Google Fonts
 
 
 ## Contribution
@@ -48,8 +48,9 @@ As a health-conscious food enthusiast, I want to find meal options that meet my 
 
 ## Links and Photos
 
-[Deployed Website](https://catxcoding.github.io/chowtube/)---
-[Repository](https://github.com/catxcoding/chowtube)---
+[Deployed Website](https://catxcoding.github.io/chowtube/)
+
+[Repository](https://github.com/catxcoding/chowtube)
 
 ![ScreenShot1](assets/images/screenshot1.png)
 ![ScreenShot](assets/images/screenshot2.png)
